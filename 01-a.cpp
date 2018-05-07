@@ -9,6 +9,13 @@
 #include<fstream>
 using namespace std;
 
+string rev(string a){
+    string b = "";
+    for(int i = a.size() - 1; i >=0; i--)
+        b += a[i];
+    return b;
+}
+
 int main(){
     string inputFileName, outputFileName;
     cout << "enter name of file to read from: ";
@@ -20,6 +27,9 @@ int main(){
     fin.open(inputFileName);
     fout.open(outputFileName);
     string buffer;
-    while(fin>>buffer) fout << buffer << endl;
+
+    // read line by line and then convert
+    while(fin>>buffer)
+        fout << rev(buffer) << endl;
     return 0;
 }

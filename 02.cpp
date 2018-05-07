@@ -112,6 +112,5 @@ int Student::search(string given_search = ""){
 }
 int main(){
     Student student(100);
-    student.modify();
     return 0;
 }

@@ -28,11 +28,11 @@ void Student::unpack(){
 void Student::write(){
    cout << "Enter Student details:\n";
    cout << "Name: ";
-   cin >> name;
+   getline(cin, name);
    cout << "USN: ";
-   cin >> usn;
+   getline(cin, usn);
    cout << "Branch: ";
-   cin >> branch;
+   getline(cin, branch);
    pack();
    fstream fp;
    fp.open(file_name, ios::app);
@@ -42,7 +42,7 @@ void Student::write(){
 void Student::read(){
     ifstream fin;
     fin.open(file_name);
-    while(fin >> buffer){
+    while(getline(fin, buffer)){
         unpack();
         cout << "=========Student Record==========" << endl;
         cout << "Name: "<< name << endl;
@@ -54,18 +54,18 @@ void Student::modify(){
     string delete_usn;
     bool found = false;
     cout << "Enter the usn to be deleted: ";
-    cin >> delete_usn;
+    getline(cin, delete_usn);
     ifstream fin;
     ofstream fout;
     fin.open(file_name);
     fout.open(file_name+".tmp");
-    while(fin >> buffer){
+    while(getline(fin,buffer)){
         unpack();
         if(usn == delete_usn){
             cout << "Enter new name: ";
-            cin >> name;
+            getline(cin, name);
             cout << "Enter new branch: ";
-            cin >> branch;
+            getline(cin, branch);
             pack();
             found = true;
             fout << buffer;
@@ -83,7 +83,7 @@ int Student::search(string given_search = ""){
     string search_usn;
     if(given_search == ""){
         cout << "Enter the usn to be searched: ";
-        cin >> search_usn;
+        getline(cin, search_usn);
     }
     else{
         search_usn = given_search;
@@ -91,7 +91,7 @@ int Student::search(string given_search = ""){
     ifstream fin;
     fin.open(file_name);
     int position = 0;
-    while(fin >> buffer){
+    while(getline(fin, buffer)){
         unpack();
         if(usn == search_usn){
             if(given_search == ""){
@@ -108,6 +108,5 @@ int Student::search(string given_search = ""){
 }
 int main(){
     Student student;
-    student.modify();
     return 0;
 }
